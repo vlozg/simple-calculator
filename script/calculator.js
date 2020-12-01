@@ -1,13 +1,30 @@
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            value: 0,
+            inputMode: "dec",
+            theme: "default"
+        }
+        this.handleInput = this.handleInput.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleModeChange = this.handleModeChange.bind(this);
     }
+
+    handleInput(newValue) {
+        this.setState({value: newValue});
+    }
+
+    handleKeyPress(event) {
+    }
+
+    handleModeChange(event) {}
 
     render() {
         return (
         <React.Fragment>
-            <DisplaySection/>
-            <ButtonSection/>
+            <DisplaySection value={this.state.value} mode={this.state.inputMode} onModeChange={this.handleModeChange} onInputChange={this.handleInput}/>
+            <ButtonSection focus={this.state.currentFocus} onButtonPress={this.handleButton}/>
         </React.Fragment>
         );
     }
@@ -16,50 +33,58 @@ class App extends React.Component {
 class DisplaySection extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            main: "dec",
+            focus: "dec"
+        }
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(newValue) {
+        this.props.onInputChange(newValue);
     }
 
     render() {
         return (
         <React.Fragment>
-            <MainDisplay/>
+            <Display value={this.props.value} onInputChange={this.handleInputChange}/>
             <div>
-                <Button className="binary" value="B"/>
-                <SubDisplay value="0"/>
+                <Button className="binary" value="Bin"/>
+                <Display value={this.props.value} onInputChange={this.handleInputChange}/>
             </div>
             <div>
-                <Button className="hexa" value="H"/>
-                <SubDisplay value="0"/>
+                <Button className="hexa" value="Hex"/>
+                <Display value={this.props.value} onInputChange={this.handleInputChange}/>
             </div>
         </React.Fragment>
         );
     }
 }
 
-class SubDisplay extends React.Component {
+class Display extends React.Component {
     constructor(props) {
         super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        this.props.onInputChange(e.target.value);
     }
 
     render() {
-        return (
-        <React.Fragment>
-            <input type="text" value={this.props.value}/>
-        </React.Fragment>
-        );
-    }
-}
-
-class MainDisplay extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-        <React.Fragment>
-            <input type="text" value={this.props.value}/>
-        </React.Fragment>
-        );
+        if (this.props.inputDisable != true) {
+            return (
+            <React.Fragment>
+                <input type="text" value={this.props.value} onChange={this.handleChange}/>
+            </React.Fragment>
+            );
+        } else {
+            return (
+            <React.Fragment>
+                <input type="text" value={this.props.value} readOnly/>
+            </React.Fragment>
+            );
+        }
     }
 }
 
