@@ -1,5 +1,5 @@
-import {ButtonSection} from "./ButtonSection.js"
-import {DisplaySection} from "./DisplaySection.js"
+import {ButtonSection} from "./ButtonSection.js";
+import {DisplaySection} from "./DisplaySection.js";
 
 class App extends React.Component {
     constructor(props) {
@@ -7,12 +7,9 @@ class App extends React.Component {
         this.state = {
             ans: 0,
             value: 0,
-            inputMode: "dec",
-            theme: "default"
         }
         this.handleInput = this.handleInput.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
-        this.handleModeChange = this.handleModeChange.bind(this);
         this.handleButton = this.handleButton.bind(this);
     }
 
@@ -21,8 +18,6 @@ class App extends React.Component {
     }
 
     handleKeyPress(event) {}
-
-    handleModeChange(event) {}
 
     handleButton(instruct) {
         switch(instruct) {

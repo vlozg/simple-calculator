@@ -15,7 +15,7 @@ var ButtonSection = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (ButtonSection.__proto__ || Object.getPrototypeOf(ButtonSection)).call(this, props));
 
         _this.state = {
-            buttons: [{ id: "reverse", symbol: "±", isDisable: false }, { id: "dot", symbol: "." }, { id: "0", symbol: "0", isDisable: false }, { id: "1", symbol: "1", isDisable: false }, { id: "2", symbol: "2", isDisable: false }, { id: "3", symbol: "3", isDisable: false }, { id: "4", symbol: "4", isDisable: false }, { id: "5", symbol: "5", isDisable: false }, { id: "6", symbol: "6", isDisable: false }, { id: "7", symbol: "7", isDisable: false }, { id: "8", symbol: "8", isDisable: false }, { id: "9", symbol: "9", isDisable: false }, { id: "plus", symbol: "+", isDisable: false }, { id: "minus", symbol: "-", isDisable: false }, { id: "times", symbol: "×", isDisable: false }, { id: "divide", symbol: "÷", isDisable: false }, { id: "calc", symbol: "=", isDisable: false }, { id: "clear", symbol: "C.", isDisable: false }]
+            buttons: [{ id: "reverse", symbol: "±", isDisable: false }, { id: "dot", symbol: "." }, { id: "num0", symbol: "0", isDisable: false }, { id: "num1", symbol: "1", isDisable: false }, { id: "num2", symbol: "2", isDisable: false }, { id: "num3", symbol: "3", isDisable: false }, { id: "num4", symbol: "4", isDisable: false }, { id: "num5", symbol: "5", isDisable: false }, { id: "num6", symbol: "6", isDisable: false }, { id: "num7", symbol: "7", isDisable: false }, { id: "num8", symbol: "8", isDisable: false }, { id: "num9", symbol: "9", isDisable: false }, { id: "plus", symbol: "+", isDisable: false }, { id: "minus", symbol: "-", isDisable: false }, { id: "times", symbol: "×", isDisable: false }, { id: "divide", symbol: "÷", isDisable: false }, { id: "calc", symbol: "=", isDisable: false }, { id: "del", symbol: "⌫", isDisable: false }, { id: "clear", symbol: "AC", isDisable: false }]
         };
         _this.handleButton = _this.handleButton.bind(_this);
         return _this;
@@ -52,10 +52,64 @@ var Button = function (_React$Component2) {
     function Button(props) {
         _classCallCheck(this, Button);
 
-        return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+        var _this3 = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+
+        _this3.state = {
+            isPressed: false,
+            pressLevel: 0
+        };
+        _this3.handleClick = _this3.handleClick.bind(_this3);
+        _this3.handleMouseDown = _this3.handleMouseDown.bind(_this3);
+        _this3.handleMouseUp = _this3.handleMouseUp.bind(_this3);
+        _this3.handleLevel = _this3.handleLevel.bind(_this3);
+        _this3.levelUp = function () {
+            if (_this3.state.pressLevel < 2) {
+                _this3.setState(function (state) {
+                    return { pressLevel: state.pressLevel + 1 };
+                });
+            }
+        };
+        _this3.levelDown = function () {
+            if (_this3.state.pressLevel > 0) {
+                _this3.setState(function (state) {
+                    return { pressLevel: state.pressLevel - 1 };
+                });
+            }
+        };
+        return _this3;
     }
 
     _createClass(Button, [{
+        key: "handleClick",
+        value: function handleClick() {
+            this.props.onPress();
+        }
+    }, {
+        key: "handleMouseDown",
+        value: function handleMouseDown() {
+            this.setState({ isPressed: true });
+            this.levelUp();
+        }
+    }, {
+        key: "handleMouseUp",
+        value: function handleMouseUp(act) {
+            if (this.state.pressLevel == 0 & act != "leave") {
+                this.levelUp();
+                this.levelUp();
+            }
+            this.setState({ isPressed: false });
+            this.levelDown();
+        }
+    }, {
+        key: "handleLevel",
+        value: function handleLevel() {
+            if (this.state.isPressed) {
+                this.levelUp();
+            } else {
+                this.levelDown();
+            }
+        }
+    }, {
         key: "render",
         value: function render() {
             var _this4 = this;
@@ -63,15 +117,18 @@ var Button = function (_React$Component2) {
             if (this.props.isDisable != false) {
                 return React.createElement(
                     "button",
-                    { className: this.props.className, value: this.props.value, disabled: true },
+                    { key: this.props.className, className: this.props.className + " disabled", value: this.props.value, disabled: true },
                     this.props.value
                 );
             } else {
+                var pressClass = this.state.pressLevel > 0 ? " pressed" + this.state.pressLevel : "";
                 return React.createElement(
                     "button",
-                    { className: this.props.className, onClick: function onClick() {
-                            return _this4.props.onPress();
-                        } },
+                    { key: this.props.className, className: this.props.className + pressClass,
+                        onClick: this.handleClick, onMouseDown: this.handleMouseDown,
+                        onMouseUp: this.handleMouseUp, onMouseLeave: function onMouseLeave() {
+                            return _this4.handleMouseUp("leave");
+                        }, onTransitionEnd: this.handleLevel },
                     this.props.value
                 );
             }

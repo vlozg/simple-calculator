@@ -5,22 +5,23 @@ class ButtonSection extends React.Component {
             buttons: [
                 {id: "reverse",symbol:"±", isDisable: false}, 
                 {id: "dot", symbol:"."}, 
-                {id: "0", symbol:"0", isDisable: false}, 
-                {id: "1", symbol:"1", isDisable: false},
-                {id: "2", symbol:"2", isDisable: false}, 
-                {id: "3", symbol:"3", isDisable: false}, 
-                {id: "4", symbol:"4", isDisable: false}, 
-                {id: "5", symbol:"5", isDisable: false}, 
-                {id: "6", symbol:"6", isDisable: false}, 
-                {id: "7", symbol:"7", isDisable: false}, 
-                {id: "8", symbol:"8", isDisable: false}, 
-                {id: "9", symbol:"9", isDisable: false}, 
+                {id: "num0", symbol:"0", isDisable: false}, 
+                {id: "num1", symbol:"1", isDisable: false},
+                {id: "num2", symbol:"2", isDisable: false}, 
+                {id: "num3", symbol:"3", isDisable: false}, 
+                {id: "num4", symbol:"4", isDisable: false}, 
+                {id: "num5", symbol:"5", isDisable: false}, 
+                {id: "num6", symbol:"6", isDisable: false}, 
+                {id: "num7", symbol:"7", isDisable: false}, 
+                {id: "num8", symbol:"8", isDisable: false}, 
+                {id: "num9", symbol:"9", isDisable: false}, 
                 {id: "plus", symbol:"+", isDisable: false}, 
                 {id: "minus", symbol:"-", isDisable: false}, 
                 {id: "times", symbol:"×", isDisable: false}, 
                 {id: "divide", symbol:"÷", isDisable: false}, 
                 {id: "calc", symbol:"=", isDisable: false}, 
-                {id: "clear", symbol:"C.", isDisable: false}
+                {id: "del", symbol:"⌫", isDisable: false},
+                {id: "clear", symbol:"AC", isDisable: false}
             ]
         }
         this.handleButton = this.handleButton.bind(this);
@@ -42,18 +43,67 @@ class ButtonSection extends React.Component {
 class Button extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isPressed: false,
+            pressLevel: 0
+        }
+        this.handleClick = this.handleClick.bind(this);
+        this.handleMouseDown = this.handleMouseDown.bind(this);
+        this.handleMouseUp = this.handleMouseUp.bind(this);
+        this.handleLevel = this.handleLevel.bind(this);
+        this.levelUp = () => {
+            if (this.state.pressLevel < 2){
+                this.setState((state) => ({pressLevel: state.pressLevel+1}));
+            }
+        }
+        this.levelDown = () => {
+            if (this.state.pressLevel > 0){
+                this.setState((state) => ({pressLevel: state.pressLevel-1}));
+            }
+        }
+    }
+
+    handleClick() {
+        this.props.onPress();
+    }
+
+    handleMouseDown() {
+        this.setState({isPressed: true});
+        this.levelUp();
+    }
+
+    handleMouseUp(act) {
+        if (this.state.pressLevel == 0 & act != "leave") {
+            this.levelUp();
+            this.levelUp();
+        }
+        this.setState({isPressed: false});
+        this.levelDown();
+        
+    }
+
+    handleLevel() {
+        if (this.state.isPressed)
+        {
+            this.levelUp();
+        } else {
+            this.levelDown();
+        }
     }
 
     render() {
         if (this.props.isDisable != false) {
             return (
-                <button className={this.props.className} value={this.props.value} disabled>
+                <button key={this.props.className} className={this.props.className+" disabled"} value={this.props.value} disabled>
                     {this.props.value}
                 </button>
                 );
         } else {
+            const pressClass = (this.state.pressLevel>0?" pressed"+this.state.pressLevel:"")
             return (
-            <button className={this.props.className} onClick={() => this.props.onPress()}>
+            <button key={this.props.className} className={this.props.className + pressClass} 
+                    onClick={this.handleClick} onMouseDown={this.handleMouseDown} 
+                    onMouseUp={this.handleMouseUp} onMouseLeave={() => this.handleMouseUp("leave")} onTransitionEnd={this.handleLevel}>
                 {this.props.value}
             </button>
             );

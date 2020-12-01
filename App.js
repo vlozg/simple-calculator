@@ -19,13 +19,10 @@ var App = function (_React$Component) {
 
         _this.state = {
             ans: 0,
-            value: 0,
-            inputMode: "dec",
-            theme: "default"
+            value: 0
         };
         _this.handleInput = _this.handleInput.bind(_this);
         _this.handleKeyPress = _this.handleKeyPress.bind(_this);
-        _this.handleModeChange = _this.handleModeChange.bind(_this);
         _this.handleButton = _this.handleButton.bind(_this);
         return _this;
     }
@@ -38,9 +35,6 @@ var App = function (_React$Component) {
     }, {
         key: "handleKeyPress",
         value: function handleKeyPress(event) {}
-    }, {
-        key: "handleModeChange",
-        value: function handleModeChange(event) {}
     }, {
         key: "handleButton",
         value: function handleButton(instruct) {

@@ -1,4 +1,4 @@
-import {Button} from './ButtonSection.js'
+import {Button} from './ButtonSection.js';
 
 class DisplaySection extends React.Component {
     constructor(props) {

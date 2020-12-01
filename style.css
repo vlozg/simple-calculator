@@ -1,0 +1,31 @@
+#app {
+    width: 35vh;
+    height: 51.5vh;
+    border-radius: 2vh;
+    background: #f9fbff;
+    padding: 20px;
+}
+
+.button-wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  /* This is better for small screens, once min() is better supported */
+  /* grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); */
+    grid-gap: 1rem;
+}
+
+input {
+    width: 99%;
+    height: 8vh;
+    font-size: 8vh;
+    text-align: right;
+    background: none;
+    margin-bottom: 20px;
+    border: none;
+    color: #ca1617;
+}
+
+*:focus {
+    outline: none;
+}
