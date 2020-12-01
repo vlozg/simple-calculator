@@ -3,29 +3,29 @@ class ButtonSection extends React.Component {
         super(props);
         this.state = {
             buttons: [
-                {id: "reverse",symbol:"±"}, 
+                {id: "reverse",symbol:"±", isDisable: false}, 
                 {id: "dot", symbol:"."}, 
-                {id: "0", symbol:"0"}, 
-                {id: "1", symbol:"1"}, 
-                {id: "2", symbol:"2"}, 
-                {id: "3", symbol:"3"}, 
-                {id: "4", symbol:"4"}, 
-                {id: "5", symbol:"5"}, 
-                {id: "6", symbol:"6"}, 
-                {id: "7", symbol:"7"}, 
-                {id: "8", symbol:"8"}, 
-                {id: "9", symbol:"9"}, 
+                {id: "0", symbol:"0", isDisable: false}, 
+                {id: "1", symbol:"1", isDisable: false}, 
+                {id: "2", symbol:"2", isDisable: false}, 
+                {id: "3", symbol:"3", isDisable: false}, 
+                {id: "4", symbol:"4", isDisable: false}, 
+                {id: "5", symbol:"5", isDisable: false}, 
+                {id: "6", symbol:"6", isDisable: false}, 
+                {id: "7", symbol:"7", isDisable: false}, 
+                {id: "8", symbol:"8", isDisable: false}, 
+                {id: "9", symbol:"9", isDisable: false}, 
                 {id: "A", symbol:"A"}, 
                 {id: "B", symbol:"B"}, 
                 {id: "C", symbol:"C"}, 
                 {id: "D", symbol:"D"}, 
                 {id: "E", symbol:"E"}, 
                 {id: "F", symbol:"F"}, 
-                {id: "plus", symbol:"+"}, 
-                {id: "minus", symbol:"-"}, 
-                {id: "times", symbol:"×"}, 
-                {id: "divide", symbol:"÷"}, 
-                {id: "calc", symbol:"="}, 
+                {id: "plus", symbol:"+", isDisable: false}, 
+                {id: "minus", symbol:"-", isDisable: false}, 
+                {id: "times", symbol:"×", isDisable: false}, 
+                {id: "divide", symbol:"÷", isDisable: false}, 
+                {id: "calc", symbol:"=", isDisable: false}, 
                 {id: "shift_l", symbol:"<<"}, 
                 {id: "shift_r", symbol:">>"}, 
                 {id: "rol_r", symbol:"RR"}, 
@@ -34,7 +34,7 @@ class ButtonSection extends React.Component {
                 {id:"or", symbol:"OR"},
                 {id: "xor", symbol:"XOR"},
                 {id: "not", symbol:"NOT"},
-                {id: "clear", symbol:"C."}
+                {id: "clear", symbol:"C.", isDisable: false}
             ]
         }
     }
@@ -42,7 +42,7 @@ class ButtonSection extends React.Component {
     render() {
         return (
         <div className="button-wrap">
-        {this.state.buttons.map((x) => <Button key={x.id} className={x.id} value={x.symbol}/>)}
+        {this.state.buttons.map((x) => <Button key={x.id} className={x.id} value={x.symbol} isDisable={x.isDisable}/>)}
         </div>
         );
     }
@@ -54,9 +54,15 @@ class Button extends React.Component {
     }
 
     render() {
-        return (
-        <input className={"button "+this.props.className} type="button" value={this.props.value}/>
-        );
+        if (this.props.isDisable != false) {
+            return (
+                <input className={"button "+this.props.className} type="button" value={this.props.value} disabled/>
+                );
+        } else {
+            return (
+            <input className={"button "+this.props.className} type="button" value={this.props.value}/>
+            );
+        }
     }
 }
 
