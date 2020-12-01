@@ -27,7 +27,7 @@ var ButtonSection = function (_React$Component) {
                 "div",
                 { className: "button-wrap" },
                 this.state.buttons.map(function (x) {
-                    return React.createElement(Button, { key: x.id, className: x.id, value: x.symbol, isDisable: x.isDisable });
+                    return React.createElement(Button, { key: x.id, className: x.id, value: x.symbol, isDisable: x.isDisable, onPress: x.handlePress });
                 })
             );
         }
@@ -48,10 +48,22 @@ var Button = function (_React$Component2) {
     _createClass(Button, [{
         key: "render",
         value: function render() {
+            var _this3 = this;
+
             if (this.props.isDisable != false) {
-                return React.createElement("input", { className: "button " + this.props.className, type: "button", value: this.props.value, disabled: true });
+                return React.createElement(
+                    "button",
+                    { className: this.props.className, value: this.props.value, disabled: true },
+                    this.props.value
+                );
             } else {
-                return React.createElement("input", { className: "button " + this.props.className, type: "button", value: this.props.value });
+                return React.createElement(
+                    "button",
+                    { className: this.props.className, onClick: function onClick() {
+                            return _this3.props.onPress;
+                        } },
+                    this.props.value
+                );
             }
         }
     }]);

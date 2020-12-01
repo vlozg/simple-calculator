@@ -42,7 +42,7 @@ class ButtonSection extends React.Component {
     render() {
         return (
         <div className="button-wrap">
-        {this.state.buttons.map((x) => <Button key={x.id} className={x.id} value={x.symbol} isDisable={x.isDisable}/>)}
+        {this.state.buttons.map((x) => <Button key={x.id} className={x.id} value={x.symbol} isDisable={x.isDisable} onPress={x.handlePress}/>)}
         </div>
         );
     }
@@ -56,11 +56,11 @@ class Button extends React.Component {
     render() {
         if (this.props.isDisable != false) {
             return (
-                <input className={"button "+this.props.className} type="button" value={this.props.value} disabled/>
+                <button className={this.props.className} value={this.props.value} disabled>{this.props.value}</button>
                 );
         } else {
             return (
-            <input className={"button "+this.props.className} type="button" value={this.props.value}/>
+            <button className={this.props.className} onClick={() => this.props.onPress}>{this.props.value}</button>
             );
         }
     }
