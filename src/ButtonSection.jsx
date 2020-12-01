@@ -37,12 +37,17 @@ class ButtonSection extends React.Component {
                 {id: "clear", symbol:"C.", isDisable: false}
             ]
         }
+        this.handleButton = this.handleButton.bind(this);
+    }
+
+    handleButton(instruct) {
+        this.props.onPress(instruct);
     }
 
     render() {
         return (
         <div className="button-wrap">
-        {this.state.buttons.map((x) => <Button key={x.id} className={x.id} value={x.symbol} isDisable={x.isDisable} onPress={x.handlePress}/>)}
+        {this.state.buttons.map((x) => <Button key={x.id} className={x.id} value={x.symbol} isDisable={x.isDisable} onPress={() => this.props.onPress(x.id)}/>)}
         </div>
         );
     }
@@ -56,11 +61,15 @@ class Button extends React.Component {
     render() {
         if (this.props.isDisable != false) {
             return (
-                <button className={this.props.className} value={this.props.value} disabled>{this.props.value}</button>
+                <button className={this.props.className} value={this.props.value} disabled>
+                    {this.props.value}
+                </button>
                 );
         } else {
             return (
-            <button className={this.props.className} onClick={() => this.props.onPress}>{this.props.value}</button>
+            <button className={this.props.className} onClick={() => this.props.onPress()}>
+                {this.props.value}
+            </button>
             );
         }
     }

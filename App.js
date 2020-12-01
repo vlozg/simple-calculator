@@ -18,6 +18,7 @@ var App = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.state = {
+            ans: 0,
             value: 0,
             inputMode: "dec",
             theme: "default"
@@ -25,13 +26,14 @@ var App = function (_React$Component) {
         _this.handleInput = _this.handleInput.bind(_this);
         _this.handleKeyPress = _this.handleKeyPress.bind(_this);
         _this.handleModeChange = _this.handleModeChange.bind(_this);
+        _this.handleButton = _this.handleButton.bind(_this);
         return _this;
     }
 
     _createClass(App, [{
         key: "handleInput",
         value: function handleInput(newValue) {
-            this.setState({ value: newValue });
+            this.setState({ value: parseInt(newValue) });
         }
     }, {
         key: "handleKeyPress",
@@ -40,13 +42,74 @@ var App = function (_React$Component) {
         key: "handleModeChange",
         value: function handleModeChange(event) {}
     }, {
+        key: "handleButton",
+        value: function handleButton(instruct) {
+            switch (instruct) {
+                case "reverse":
+                    this.setState(function (state) {
+                        return { value: state.value * -1 };
+                    });
+                    break;
+                case "0":
+                    this.setState(function (state) {
+                        return { value: state.value * 10 };
+                    });
+                    break;
+                case "1":
+                    this.setState(function (state) {
+                        return { value: state.value * 10 + 1 };
+                    });
+                    break;
+                case "2":
+                    this.setState(function (state) {
+                        return { value: state.value * 10 + 2 };
+                    });
+                    break;
+                case "3":
+                    this.setState(function (state) {
+                        return { value: state.value * 10 + 3 };
+                    });
+                    break;
+                case "4":
+                    this.setState(function (state) {
+                        return { value: state.value * 10 + 4 };
+                    });
+                    break;
+                case "5":
+                    this.setState(function (state) {
+                        return { value: state.value * 10 + 5 };
+                    });
+                    break;
+                case "6":
+                    this.setState(function (state) {
+                        return { value: state.value * 10 + 6 };
+                    });
+                    break;
+                case "7":
+                    this.setState(function (state) {
+                        return { value: state.value * 10 + 7 };
+                    });
+                    break;
+                case "8":
+                    this.setState(function (state) {
+                        return { value: state.value * 10 + 8 };
+                    });
+                    break;
+                case "9":
+                    this.setState(function (state) {
+                        return { value: state.value * 10 + 9 };
+                    });
+                    break;
+            }
+        }
+    }, {
         key: "render",
         value: function render() {
             return React.createElement(
                 React.Fragment,
                 null,
                 React.createElement(DisplaySection, { value: this.state.value, mode: this.state.inputMode, onModeChange: this.handleModeChange, onInputChange: this.handleInput }),
-                React.createElement(ButtonSection, { focus: this.state.currentFocus, onButtonPress: this.handleButton })
+                React.createElement(ButtonSection, { mode: this.state.inputMode, onPress: this.handleButton })
             );
         }
     }]);
