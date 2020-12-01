@@ -65,8 +65,8 @@ class App extends React.Component {
     render() {
         return (
         <React.Fragment>
-            <DisplaySection value={this.state.value} mode={this.state.inputMode} onModeChange={this.handleModeChange} onInputChange={this.handleInput}/>
-            <ButtonSection mode={this.state.inputMode} onPress={this.handleButton}/>
+            <DisplaySection value={this.state.value} onInputChange={this.handleInput}/>
+            <ButtonSection onPress={this.handleButton}/>
         </React.Fragment>
         );
     }

@@ -3,10 +3,6 @@ import {Button} from './ButtonSection.js'
 class DisplaySection extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            main: "dec",
-            focus: "dec"
-        }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
@@ -18,14 +14,6 @@ class DisplaySection extends React.Component {
         return (
         <React.Fragment>
             <Display value={this.props.value} onInputChange={this.handleInputChange}/>
-            <div>
-                <Button className="binary" value="Bin"/>
-                <Display value={this.props.value} onInputChange={this.handleInputChange}/>
-            </div>
-            <div>
-                <Button className="hexa" value="Hex"/>
-                <Display value={this.props.value} onInputChange={this.handleInputChange}/>
-            </div>
         </React.Fragment>
         );
     }

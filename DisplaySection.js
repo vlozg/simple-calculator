@@ -16,10 +16,6 @@ var DisplaySection = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (DisplaySection.__proto__ || Object.getPrototypeOf(DisplaySection)).call(this, props));
 
-        _this.state = {
-            main: "dec",
-            focus: "dec"
-        };
         _this.handleInputChange = _this.handleInputChange.bind(_this);
         return _this;
     }
@@ -35,19 +31,7 @@ var DisplaySection = function (_React$Component) {
             return React.createElement(
                 React.Fragment,
                 null,
-                React.createElement(Display, { value: this.props.value, onInputChange: this.handleInputChange }),
-                React.createElement(
-                    "div",
-                    null,
-                    React.createElement(Button, { className: "binary", value: "Bin" }),
-                    React.createElement(Display, { value: this.props.value, onInputChange: this.handleInputChange })
-                ),
-                React.createElement(
-                    "div",
-                    null,
-                    React.createElement(Button, { className: "hexa", value: "Hex" }),
-                    React.createElement(Display, { value: this.props.value, onInputChange: this.handleInputChange })
-                )
+                React.createElement(Display, { value: this.props.value, onInputChange: this.handleInputChange })
             );
         }
     }]);
