@@ -24,34 +24,34 @@ class App extends React.Component {
             case "reverse":
                 this.setState((state) => ({value: state.value*(-1)}));
                 break;
-            case "0":
+            case "num0":
                 this.setState((state) => ({value: state.value*10}));
                 break;
-            case "1":
+            case "num1":
                 this.setState((state) => ({value: state.value*10+1}));
                 break;
-            case "2":
+            case "num2":
                 this.setState((state) => ({value: state.value*10+2}));
                 break;
-            case "3":
+            case "num3":
                 this.setState((state) => ({value: state.value*10+3}));
                 break;
-            case "4":
+            case "num4":
                 this.setState((state) => ({value: state.value*10+4}));
                 break;
-            case "5":
+            case "num5":
                 this.setState((state) => ({value: state.value*10+5}));
                 break;
-            case "6":
+            case "num6":
                 this.setState((state) => ({value: state.value*10+6}));
                 break;
-            case "7":
+            case "num7":
                 this.setState((state) => ({value: state.value*10+7}));
                 break;
-            case "8":
+            case "num8":
                 this.setState((state) => ({value: state.value*10+8}));
                 break;
-            case "9":
+            case "num9":
                 this.setState((state) => ({value: state.value*10+9}));
                 break;
         }
