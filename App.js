@@ -18,6 +18,7 @@ var App = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.state = {
+            history: "",
             ans: 0,
             value: 0
         };
@@ -30,7 +31,7 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: "handleInput",
         value: function handleInput(newValue) {
-            this.setState({ value: parseInt(newValue) });
+            if (!isNaN(newValue)) this.setState({ value: parseInt(newValue) });
         }
     }, {
         key: "handleKeyPress",
@@ -93,6 +94,20 @@ var App = function (_React$Component) {
                     this.setState(function (state) {
                         return { value: state.value * 10 + 9 };
                     });
+                    break;
+                case "plus":
+                    break;
+                case "minus":
+                    break;
+                case "times":
+                    break;
+                case "divide":
+                    break;
+                case "calc":
+                    break;
+                case "del":
+                    break;
+                case "clear":
                     break;
             }
         }

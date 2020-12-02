@@ -5,6 +5,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            history: "",
             ans: 0,
             value: 0,
         }
@@ -14,7 +15,8 @@ class App extends React.Component {
     }
 
     handleInput(newValue) {
-        this.setState({value: parseInt(newValue)});
+        if (!isNaN(newValue))
+            this.setState({value: parseInt(newValue)});
     }
 
     handleKeyPress(event) {}
@@ -54,6 +56,20 @@ class App extends React.Component {
             case "num9":
                 this.setState((state) => ({value: state.value*10+9}));
                 break;
+            case "plus":
+                break;
+            case "minus":
+                break;
+            case "times":
+                break;
+            case "divide":
+                break;
+            case "calc":
+                break;
+            case "del":
+                break;
+            case "clear":
+                break;
         }
     }
 
@@ -66,5 +82,7 @@ class App extends React.Component {
         );
     }
 }
+
+
 
 ReactDOM.render(<App/>, document.querySelector('#app'));
