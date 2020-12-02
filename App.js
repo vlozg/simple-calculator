@@ -123,7 +123,7 @@ var App = function (_React$Component) {
                             value: this.calculateCurrent(),
                             hidden: false };
                         newState.value = 0;
-                        newState.isEmptyInput = 0;
+                        newState.isEmptyInput = true;
                     }
                     this.setState(newState);
                     break;
@@ -134,6 +134,16 @@ var App = function (_React$Component) {
                 case "divide":
                     break;
                 case "calc":
+                    if (this.state.lastOp != "" || this.state.value != 0) {
+                        var _newState = {};
+                        _newState.ans = {
+                            value: 0,
+                            hidden: true };
+                        _newState.value = this.calculateCurrent();
+                        _newState.lastOp = "";
+                        _newState.isEmptyInput = true;
+                        this.setState(_newState);
+                    }
                     break;
                 case "del":
                     this.setState(function (state) {
