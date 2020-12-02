@@ -18,10 +18,12 @@ var App = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.state = {
-            history: "",
             lastOp: "",
-            ans: 0,
-            value: 0
+            ans: {
+                value: 0,
+                hidden: true },
+            value: 0,
+            isEmptyInput: true
         };
         _this.handleInput = _this.handleInput.bind(_this);
         _this.handleKeyPress = _this.handleKeyPress.bind(_this);
@@ -32,7 +34,7 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: "handleInput",
         value: function handleInput(newValue) {
-            if (!isNaN(newValue)) this.setState({ value: parseInt(newValue) });
+            if (!isNaN(newValue)) if (newValue == "") this.setState({ value: 0 });else this.setState({ value: parseInt(newValue), isEmptyInput: false });
         }
     }, {
         key: "handleKeyPress",
@@ -48,55 +50,65 @@ var App = function (_React$Component) {
                     break;
                 case "num0":
                     this.setState(function (state) {
-                        return { value: state.value * 10 };
+                        return { value: state.value * 10, isEmptyInput: false };
                     });
                     break;
                 case "num1":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 1 };
+                        return { value: state.value * 10 + 1, isEmptyInput: false };
                     });
                     break;
                 case "num2":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 2 };
+                        return { value: state.value * 10 + 2, isEmptyInput: false };
                     });
                     break;
                 case "num3":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 3 };
+                        return { value: state.value * 10 + 3, isEmptyInput: false };
                     });
                     break;
                 case "num4":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 4 };
+                        return { value: state.value * 10 + 4, isEmptyInput: false };
                     });
                     break;
                 case "num5":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 5 };
+                        return { value: state.value * 10 + 5, isEmptyInput: false };
                     });
                     break;
                 case "num6":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 6 };
+                        return { value: state.value * 10 + 6, isEmptyInput: false };
                     });
                     break;
                 case "num7":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 7 };
+                        return { value: state.value * 10 + 7, isEmptyInput: false };
                     });
                     break;
                 case "num8":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 8 };
+                        return { value: state.value * 10 + 8, isEmptyInput: false };
                     });
                     break;
                 case "num9":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 9 };
+                        return { value: state.value * 10 + 9, isEmptyInput: false };
                     });
                     break;
                 case "plus":
+                    var newState = {};
+                    if (this.state.lastOp != "" || this.state.value != 0) newState.lastOp = instruct;
+                    if (!this.state.isEmptyInput) {
+                        newState.ans = {
+                            value: this.state.ans.value + this.state.value,
+                            hidden: false };
+                        newState.value = 0;
+                        newState.isEmptyInput = 0;
+                    }
+                    this.setState(newState);
                     break;
                 case "minus":
                     break;
@@ -112,6 +124,14 @@ var App = function (_React$Component) {
                     });
                     break;
                 case "clear":
+                    this.setState({
+                        lastOp: "",
+                        ans: {
+                            value: 0,
+                            hidden: true },
+                        value: 0,
+                        isEmptyInput: true
+                    });
                     break;
             }
         }
@@ -121,7 +141,7 @@ var App = function (_React$Component) {
             return React.createElement(
                 React.Fragment,
                 null,
-                React.createElement(DisplaySection, { value: this.state.value, onInputChange: this.handleInput }),
+                React.createElement(DisplaySection, { value: this.state.value, ans: this.state.ans, onInputChange: this.handleInput }),
                 React.createElement(ButtonSection, { onPress: this.handleButton })
             );
         }

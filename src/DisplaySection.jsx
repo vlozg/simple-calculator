@@ -13,7 +13,8 @@ class DisplaySection extends React.Component {
     render() {
         return (
         <React.Fragment>
-            <Display value={this.props.value} onInputChange={this.handleInputChange}/>
+            <Display className="input" value={this.props.value} onInputChange={this.handleInputChange}/>
+            <Display className="ans" value={this.props.ans.value} inputDisable={true} hidden={this.props.ans.hidden}/>
         </React.Fragment>
         );
     }
@@ -33,13 +34,13 @@ class Display extends React.Component {
         if (this.props.inputDisable != true) {
             return (
             <React.Fragment>
-                <input type="text" value={this.props.value} onChange={this.handleChange}/>
+                <input className={this.props.className} type="text" value={this.props.value} onChange={this.handleChange}/>
             </React.Fragment>
             );
         } else {
             return (
             <React.Fragment>
-                <input type="text" value={this.props.value} readOnly/>
+                <input className={this.props.className} type="text" value={this.props.value} readOnly/>
             </React.Fragment>
             );
         }

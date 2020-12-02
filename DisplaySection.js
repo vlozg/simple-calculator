@@ -31,7 +31,8 @@ var DisplaySection = function (_React$Component) {
             return React.createElement(
                 React.Fragment,
                 null,
-                React.createElement(Display, { value: this.props.value, onInputChange: this.handleInputChange })
+                React.createElement(Display, { className: "input", value: this.props.value, onInputChange: this.handleInputChange }),
+                React.createElement(Display, { className: "ans", value: this.props.ans.value, inputDisable: true, hidden: this.props.ans.hidden })
             );
         }
     }]);
@@ -63,13 +64,13 @@ var Display = function (_React$Component2) {
                 return React.createElement(
                     React.Fragment,
                     null,
-                    React.createElement("input", { type: "text", value: this.props.value, onChange: this.handleChange })
+                    React.createElement("input", { className: this.props.className, type: "text", value: this.props.value, onChange: this.handleChange })
                 );
             } else {
                 return React.createElement(
                     React.Fragment,
                     null,
-                    React.createElement("input", { type: "text", value: this.props.value, readOnly: true })
+                    React.createElement("input", { className: this.props.className, type: "text", value: this.props.value, readOnly: true })
                 );
             }
         }

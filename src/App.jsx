@@ -5,11 +5,13 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            history: "",
             lastOp: "",
-            ans: 0,
+            ans: {
+                value: 0,
+                hidden: true},
             value: 0,
-        }
+            isEmptyInput: true
+        };
         this.handleInput = this.handleInput.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleButton = this.handleButton.bind(this);
@@ -17,7 +19,10 @@ class App extends React.Component {
 
     handleInput(newValue) {
         if (!isNaN(newValue))
-            this.setState({value: parseInt(newValue)});
+            if (newValue=="")
+                this.setState({value: 0});
+            else
+                this.setState({value: parseInt(newValue), isEmptyInput: false});
     }
 
     handleKeyPress(event) {}
@@ -28,36 +33,47 @@ class App extends React.Component {
                 this.setState((state) => ({value: state.value*(-1)}));
                 break;
             case "num0":
-                this.setState((state) => ({value: state.value*10}));
+                this.setState((state) => ({value: state.value*10, isEmptyInput: false}));
                 break;
             case "num1":
-                this.setState((state) => ({value: state.value*10+1}));
+                this.setState((state) => ({value: state.value*10+1, isEmptyInput: false}));
                 break;
             case "num2":
-                this.setState((state) => ({value: state.value*10+2}));
+                this.setState((state) => ({value: state.value*10+2, isEmptyInput: false}));
                 break;
             case "num3":
-                this.setState((state) => ({value: state.value*10+3}));
+                this.setState((state) => ({value: state.value*10+3, isEmptyInput: false}));
                 break;
             case "num4":
-                this.setState((state) => ({value: state.value*10+4}));
+                this.setState((state) => ({value: state.value*10+4, isEmptyInput: false}));
                 break;
             case "num5":
-                this.setState((state) => ({value: state.value*10+5}));
+                this.setState((state) => ({value: state.value*10+5, isEmptyInput: false}));
                 break;
             case "num6":
-                this.setState((state) => ({value: state.value*10+6}));
+                this.setState((state) => ({value: state.value*10+6, isEmptyInput: false}));
                 break;
             case "num7":
-                this.setState((state) => ({value: state.value*10+7}));
+                this.setState((state) => ({value: state.value*10+7, isEmptyInput: false}));
                 break;
             case "num8":
-                this.setState((state) => ({value: state.value*10+8}));
+                this.setState((state) => ({value: state.value*10+8, isEmptyInput: false}));
                 break;
             case "num9":
-                this.setState((state) => ({value: state.value*10+9}));
+                this.setState((state) => ({value: state.value*10+9, isEmptyInput: false}));
                 break;
             case "plus":
+                let newState = {};
+                if (this.state.lastOp != "" || this.state.value != 0)
+                    newState.lastOp = instruct;
+                if (!this.state.isEmptyInput){
+                    newState.ans = {
+                        value: this.state.ans.value + this.state.value,
+                        hidden: false};
+                    newState.value = 0;
+                    newState.isEmptyInput = 0;
+                }
+                this.setState(newState);
                 break;
             case "minus":
                 break;
@@ -71,6 +87,14 @@ class App extends React.Component {
                 this.setState((state) => ({value: Math.floor(state.value/10)}));
                 break;
             case "clear":
+                this.setState({
+                    lastOp: "",
+                    ans: {
+                        value: 0,
+                        hidden: true},
+                    value: 0,
+                    isEmptyInput: true
+                });
                 break;
         }
     }
@@ -78,7 +102,7 @@ class App extends React.Component {
     render() {
         return (
         <React.Fragment>
-            <DisplaySection value={this.state.value} onInputChange={this.handleInput}/>
+            <DisplaySection value={this.state.value} ans={this.state.ans} onInputChange={this.handleInput}/>
             <ButtonSection onPress={this.handleButton}/>
         </React.Fragment>
         );
