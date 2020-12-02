@@ -3,12 +3,20 @@
     color: #f9fbff;
 }
 
+* {
+    user-select: none;
+}
+
+body {
+    background: #cdfafd;
+}
+
 #app {
+    position: absolute;
     width: 35vh;
-    height: 51.5vh;
     border-radius: 2vh;
     background: #f9fbff;
-    padding: 20px;
+    padding: 30px 20px;
 }
 
 .button-wrap {
@@ -20,15 +28,32 @@
     grid-gap: 1rem;
 }
 
-input {
+input.input {
     width: 99%;
     height: 8vh;
     font-size: 8vh;
     text-align: right;
     background: none;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: none;
     color: #ca1617;
+}
+
+input.ans {
+    width: 99%;
+    height: 3vh;
+    font-size: 3vh;
+    text-align: right;
+    background: none;
+    margin-bottom: 20px;
+    border: none;
+    color: #a6a6a6;
+    transition: height 0.3ms ease-in-out, font-size 0.3ms ease-in-out;
+}
+
+input.hidden {
+    height: 0vh;
+    font-size: 0vh;
 }
 
 input.focus {
