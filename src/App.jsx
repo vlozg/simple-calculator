@@ -15,6 +15,22 @@ class App extends React.Component {
         this.handleInput = this.handleInput.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleButton = this.handleButton.bind(this);
+        this.calculateCurrent = this.calculateCurrent.bind(this);
+    }
+
+    calculateCurrent() {
+        switch (this.state.lastOp) {
+            case "plus":
+                return this.state.ans.value + this.state.value;
+            case "minus":
+                return this.state.ans.value - this.state.value;
+            case "times":
+                return this.state.ans.value * this.state.value;
+            case "divide":
+                return this.state.ans.value / this.state.value;
+            default:
+                return this.state.value;
+        }
     }
 
     handleInput(newValue) {
@@ -68,7 +84,7 @@ class App extends React.Component {
                     newState.lastOp = instruct;
                 if (!this.state.isEmptyInput){
                     newState.ans = {
-                        value: this.state.ans.value + this.state.value,
+                        value: this.calculateCurrent(),
                         hidden: false};
                     newState.value = 0;
                     newState.isEmptyInput = 0;

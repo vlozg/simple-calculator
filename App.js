@@ -28,10 +28,27 @@ var App = function (_React$Component) {
         _this.handleInput = _this.handleInput.bind(_this);
         _this.handleKeyPress = _this.handleKeyPress.bind(_this);
         _this.handleButton = _this.handleButton.bind(_this);
+        _this.calculateCurrent = _this.calculateCurrent.bind(_this);
         return _this;
     }
 
     _createClass(App, [{
+        key: "calculateCurrent",
+        value: function calculateCurrent() {
+            switch (this.state.lastOp) {
+                case "plus":
+                    return this.state.ans.value + this.state.value;
+                case "minus":
+                    return this.state.ans.value - this.state.value;
+                case "times":
+                    return this.state.ans.value * this.state.value;
+                case "divide":
+                    return this.state.ans.value / this.state.value;
+                default:
+                    return this.state.value;
+            }
+        }
+    }, {
         key: "handleInput",
         value: function handleInput(newValue) {
             if (!isNaN(newValue)) if (newValue == "") this.setState({ value: 0 });else this.setState({ value: parseInt(newValue), isEmptyInput: false });
@@ -103,7 +120,7 @@ var App = function (_React$Component) {
                     if (this.state.lastOp != "" || this.state.value != 0) newState.lastOp = instruct;
                     if (!this.state.isEmptyInput) {
                         newState.ans = {
-                            value: this.state.ans.value + this.state.value,
+                            value: this.calculateCurrent(),
                             hidden: false };
                         newState.value = 0;
                         newState.isEmptyInput = 0;
