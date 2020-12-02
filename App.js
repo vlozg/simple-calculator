@@ -19,6 +19,7 @@ var App = function (_React$Component) {
 
         _this.state = {
             history: "",
+            lastOp: "",
             ans: 0,
             value: 0
         };
@@ -106,6 +107,9 @@ var App = function (_React$Component) {
                 case "calc":
                     break;
                 case "del":
+                    this.setState(function (state) {
+                        return { value: Math.floor(state.value / 10) };
+                    });
                     break;
                 case "clear":
                     break;

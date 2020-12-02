@@ -6,6 +6,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             history: "",
+            lastOp: "",
             ans: 0,
             value: 0,
         }
@@ -67,6 +68,7 @@ class App extends React.Component {
             case "calc":
                 break;
             case "del":
+                this.setState((state) => ({value: Math.floor(state.value/10)}));
                 break;
             case "clear":
                 break;
