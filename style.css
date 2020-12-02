@@ -28,14 +28,19 @@ body {
     grid-gap: 1rem;
 }
 
+input {
+    border: none;
+    background: none;
+    transition-timing-function: ease-in-out;
+    transition: height 0.3s, font-size 0.3s, margin-bottom 0.3s;
+}
+
 input.input {
     width: 99%;
     height: 8vh;
     font-size: 8vh;
     text-align: right;
-    background: none;
     margin-bottom: 10px;
-    border: none;
     color: #ca1617;
 }
 
@@ -44,16 +49,15 @@ input.ans {
     height: 3vh;
     font-size: 3vh;
     text-align: right;
-    background: none;
     margin-bottom: 20px;
-    border: none;
     color: #a6a6a6;
-    transition: height 0.3ms ease-in-out, font-size 0.3ms ease-in-out;
+    
 }
 
 input.hidden {
     height: 0vh;
     font-size: 0vh;
+    margin-bottom: 10px;
 }
 
 input.focus {

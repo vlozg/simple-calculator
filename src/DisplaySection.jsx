@@ -34,13 +34,13 @@ class Display extends React.Component {
         if (this.props.inputDisable != true) {
             return (
             <React.Fragment>
-                <input className={this.props.className} type="text" value={this.props.value} onChange={this.handleChange}/>
+                <input className={this.props.className + (this.props.hidden?" hidden":"")} type="text" value={this.props.value} onChange={this.handleChange}/>
             </React.Fragment>
             );
         } else {
             return (
             <React.Fragment>
-                <input className={this.props.className} type="text" value={this.props.value} readOnly/>
+                <input className={this.props.className + (this.props.hidden?" hidden":"")} type="text" value={this.props.value} readOnly/>
             </React.Fragment>
             );
         }

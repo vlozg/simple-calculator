@@ -64,13 +64,13 @@ var Display = function (_React$Component2) {
                 return React.createElement(
                     React.Fragment,
                     null,
-                    React.createElement("input", { className: this.props.className, type: "text", value: this.props.value, onChange: this.handleChange })
+                    React.createElement("input", { className: this.props.className + (this.props.hidden ? " hidden" : ""), type: "text", value: this.props.value, onChange: this.handleChange })
                 );
             } else {
                 return React.createElement(
                     React.Fragment,
                     null,
-                    React.createElement("input", { className: this.props.className, type: "text", value: this.props.value, readOnly: true })
+                    React.createElement("input", { className: this.props.className + (this.props.hidden ? " hidden" : ""), type: "text", value: this.props.value, readOnly: true })
                 );
             }
         }
