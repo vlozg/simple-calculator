@@ -43,7 +43,7 @@ var App = function (_React$Component) {
                 case "times":
                     return this.state.ans.value * this.state.value;
                 case "divide":
-                    return this.state.ans.value / this.state.value;
+                    if (this.state.value != 0) return this.state.ans.value / this.state.value;else return 0;
                 default:
                     return this.state.value;
             }
@@ -116,6 +116,9 @@ var App = function (_React$Component) {
                     });
                     break;
                 case "plus":
+                case "minus":
+                case "times":
+                case "divide":
                     var newState = {};
                     if (this.state.lastOp != "" || this.state.value != 0) newState.lastOp = instruct;
                     if (!this.state.isEmptyInput) {
@@ -126,12 +129,6 @@ var App = function (_React$Component) {
                         newState.isEmptyInput = true;
                     }
                     this.setState(newState);
-                    break;
-                case "minus":
-                    break;
-                case "times":
-                    break;
-                case "divide":
                     break;
                 case "calc":
                     if (this.state.lastOp != "" || this.state.value != 0) {

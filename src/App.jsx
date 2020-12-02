@@ -27,7 +27,10 @@ class App extends React.Component {
             case "times":
                 return this.state.ans.value * this.state.value;
             case "divide":
-                return this.state.ans.value / this.state.value;
+                if (this.state.value != 0)
+                    return this.state.ans.value / this.state.value;
+                else
+                    return 0;
             default:
                 return this.state.value;
         }
@@ -79,6 +82,9 @@ class App extends React.Component {
                 this.setState((state) => ({value: state.value*10+9, isEmptyInput: false}));
                 break;
             case "plus":
+            case "minus":
+            case "times":
+            case "divide":
                 let newState = {};
                 if (this.state.lastOp != "" || this.state.value != 0)
                     newState.lastOp = instruct;
@@ -90,12 +96,6 @@ class App extends React.Component {
                     newState.isEmptyInput = true;
                 }
                 this.setState(newState);
-                break;
-            case "minus":
-                break;
-            case "times":
-                break;
-            case "divide":
                 break;
             case "calc":
                 if (this.state.lastOp != "" || this.state.value != 0){
