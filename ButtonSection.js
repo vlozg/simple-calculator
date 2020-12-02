@@ -62,14 +62,14 @@ var Button = function (_React$Component2) {
         _this3.handleMouseDown = _this3.handleMouseDown.bind(_this3);
         _this3.handleMouseUp = _this3.handleMouseUp.bind(_this3);
         _this3.handleLevel = _this3.handleLevel.bind(_this3);
-        _this3.levelUp = function () {
+        _this3.levelDown = function () {
             if (_this3.state.pressLevel < 2) {
                 _this3.setState(function (state) {
                     return { pressLevel: state.pressLevel + 1 };
                 });
             }
         };
-        _this3.levelDown = function () {
+        _this3.levelUp = function () {
             if (_this3.state.pressLevel > 0) {
                 _this3.setState(function (state) {
                     return { pressLevel: state.pressLevel - 1 };
@@ -88,25 +88,26 @@ var Button = function (_React$Component2) {
         key: "handleMouseDown",
         value: function handleMouseDown() {
             this.setState({ isPressed: true });
-            this.levelUp();
+            this.levelDown();
         }
     }, {
         key: "handleMouseUp",
         value: function handleMouseUp(act) {
             if (this.state.pressLevel == 0 & act != "leave") {
-                this.levelUp();
-                this.levelUp();
+                //Mimic pressed behavior then return
+                this.levelDown();
+                this.levelDown();
             }
             this.setState({ isPressed: false });
-            this.levelDown();
+            this.levelUp();
         }
     }, {
         key: "handleLevel",
         value: function handleLevel() {
             if (this.state.isPressed) {
-                this.levelUp();
-            } else {
                 this.levelDown();
+            } else {
+                this.levelUp();
             }
         }
     }, {

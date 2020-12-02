@@ -31,6 +31,14 @@ input {
     color: #ca1617;
 }
 
+input.focus {
+    direction: ltr;
+}
+
+input.blur {
+    direction: rtl;
+}
+
 *:focus {
     outline: none;
 }

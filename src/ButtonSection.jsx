@@ -51,12 +51,12 @@ class Button extends React.Component {
         this.handleMouseDown = this.handleMouseDown.bind(this);
         this.handleMouseUp = this.handleMouseUp.bind(this);
         this.handleLevel = this.handleLevel.bind(this);
-        this.levelUp = () => {
+        this.levelDown = () => {
             if (this.state.pressLevel < 2){
                 this.setState((state) => ({pressLevel: state.pressLevel+1}));
             }
         }
-        this.levelDown = () => {
+        this.levelUp = () => {
             if (this.state.pressLevel > 0){
                 this.setState((state) => ({pressLevel: state.pressLevel-1}));
             }
@@ -69,25 +69,26 @@ class Button extends React.Component {
 
     handleMouseDown() {
         this.setState({isPressed: true});
-        this.levelUp();
+        this.levelDown();
     }
 
     handleMouseUp(act) {
         if (this.state.pressLevel == 0 & act != "leave") {
-            this.levelUp();
-            this.levelUp();
+            //Mimic pressed behavior then return
+            this.levelDown();
+            this.levelDown();
         }
         this.setState({isPressed: false});
-        this.levelDown();
+        this.levelUp();
         
     }
 
     handleLevel() {
         if (this.state.isPressed)
         {
-            this.levelUp();
-        } else {
             this.levelDown();
+        } else {
+            this.levelUp();
         }
     }
 
