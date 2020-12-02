@@ -23,7 +23,7 @@ class ButtonSection extends React.Component {
                 {id: "del", symbol:"⌫", isDisable: false},
                 {id: "clear", symbol:"AC", isDisable: false}
             ]
-        }
+        };
         this.handleButton = this.handleButton.bind(this);
     }
 
