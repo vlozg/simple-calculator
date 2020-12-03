@@ -25,7 +25,9 @@ class App extends React.Component {
     }
     numStrPop() {
         let numStr = this.state.value.toString();
-        if (numStr.length > 1)
+        if (numStr[0] == "-" && numStr.length == 2)
+            return 0;
+        else if (numStr.length > 1)
             return parseFloat(numStr.substring(0, numStr.length - 1));
         else
             return 0;
@@ -65,34 +67,19 @@ class App extends React.Component {
                 this.setState((state) => ({value: state.value*(-1)}));
                 break;
             case "num0":
-                this.setState((state) => ({value: this.numStrAppend("0"), isEmptyInput: false}));
-                break;
             case "num1":
-                this.setState((state) => ({value: this.numStrAppend("1"), isEmptyInput: false}));
-                break;
             case "num2":
-                this.setState((state) => ({value: this.numStrAppend("2"), isEmptyInput: false}));
-                break;
             case "num3":
-                this.setState((state) => ({value: this.numStrAppend("3"), isEmptyInput: false}));
-                break;
             case "num4":
-                this.setState((state) => ({value: this.numStrAppend("4"), isEmptyInput: false}));
-                break;
             case "num5":
-                this.setState((state) => ({value: this.numStrAppend("5"), isEmptyInput: false}));
-                break;
             case "num6":
-                this.setState((state) => ({value: this.numStrAppend("6"), isEmptyInput: false}));
-                break;
             case "num7":
-                this.setState((state) => ({value: this.numStrAppend("7"), isEmptyInput: false}));
-                break;
             case "num8":
-                this.setState((state) => ({value: this.numStrAppend("8"), isEmptyInput: false}));
-                break;
             case "num9":
-                this.setState((state) => ({value: this.numStrAppend("9"), isEmptyInput: false}));
+                if (this.state.isEmptyInput)
+                    this.setState((state) => ({value: instruct[instruct.length-1], isEmptyInput: false}));
+                else
+                    this.setState((state) => ({value: this.numStrAppend(instruct[instruct.length-1]), isEmptyInput: false}));
                 break;
             case "plus":
             case "minus":
@@ -123,7 +110,8 @@ class App extends React.Component {
                 }
                 break;
             case "del":
-                this.setState((state) => ({value: this.numStrPop()}));
+                if (this.state.lastOp == "calc")
+                    this.setState((state) => ({value: this.numStrPop()}));
                 break;
             case "clear":
                 this.setState({
