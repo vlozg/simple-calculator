@@ -88,7 +88,7 @@ class App extends React.Component {
                 let newState = {};
                 if (this.state.lastOp != "" || this.state.value != 0)
                     newState.lastOp = instruct;
-                if (!this.state.isEmptyInput){
+                if (!this.state.isEmptyInput || this.state.value != 0){
                     newState.ans = {
                         value: this.calculateCurrent(),
                         hidden: false};
@@ -104,7 +104,7 @@ class App extends React.Component {
                         value: 0,
                         hidden: true};
                     newState.value = this.calculateCurrent();
-                    newState.lastOp = "";
+                    newState.lastOp = "calc";
                     newState.isEmptyInput = true;
                     this.setState(newState);
                 }
@@ -128,7 +128,7 @@ class App extends React.Component {
     render() {
         return (
         <React.Fragment>
-            <DisplaySection value={this.state.value} ans={this.state.ans} onInputChange={this.handleInput}/>
+            <DisplaySection value={this.state.value} lastOp={this.state.lastOp} ans={this.state.ans} onInputChange={this.handleInput}/>
             <ButtonSection onPress={this.handleButton}/>
         </React.Fragment>
         );

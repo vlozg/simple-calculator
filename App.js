@@ -121,7 +121,7 @@ var App = function (_React$Component) {
                 case "divide":
                     var newState = {};
                     if (this.state.lastOp != "" || this.state.value != 0) newState.lastOp = instruct;
-                    if (!this.state.isEmptyInput) {
+                    if (!this.state.isEmptyInput || this.state.value != 0) {
                         newState.ans = {
                             value: this.calculateCurrent(),
                             hidden: false };
@@ -137,7 +137,7 @@ var App = function (_React$Component) {
                             value: 0,
                             hidden: true };
                         _newState.value = this.calculateCurrent();
-                        _newState.lastOp = "";
+                        _newState.lastOp = "calc";
                         _newState.isEmptyInput = true;
                         this.setState(_newState);
                     }
@@ -165,7 +165,7 @@ var App = function (_React$Component) {
             return React.createElement(
                 React.Fragment,
                 null,
-                React.createElement(DisplaySection, { value: this.state.value, ans: this.state.ans, onInputChange: this.handleInput }),
+                React.createElement(DisplaySection, { value: this.state.value, lastOp: this.state.lastOp, ans: this.state.ans, onInputChange: this.handleInput }),
                 React.createElement(ButtonSection, { onPress: this.handleButton })
             );
         }
