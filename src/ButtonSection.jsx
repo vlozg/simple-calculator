@@ -114,7 +114,8 @@ class Button extends React.PureComponent {
             return (
             <button key={this.props.className} className={this.props.className + pressClass} 
                     onClick={this.handleClick} onMouseDown={this.handleMouseDown} 
-                    onMouseUp={this.handleMouseUp} onMouseLeave={() => this.handleMouseUp("leave")} onTransitionEnd={this.handleLevel}>
+                    onMouseUp={this.handleMouseUp} onMouseLeave={() => this.handleMouseUp("leave")} 
+                    onTouchStart={this.handleMouseDown} onTouchEnd={this.handleMouseUp} onTransitionEnd={this.handleLevel}>
                 {this.props.value}
             </button>
             );

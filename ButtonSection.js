@@ -138,7 +138,8 @@ var Button = function (_React$PureComponent) {
                         onClick: this.handleClick, onMouseDown: this.handleMouseDown,
                         onMouseUp: this.handleMouseUp, onMouseLeave: function onMouseLeave() {
                             return _this4.handleMouseUp("leave");
-                        }, onTransitionEnd: this.handleLevel },
+                        },
+                        onTouchStart: this.handleMouseDown, onTouchEnd: this.handleMouseUp, onTransitionEnd: this.handleLevel },
                     this.props.value
                 );
             }
