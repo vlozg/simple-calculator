@@ -2,19 +2,19 @@
     height: 7vh;
     width: 7vh;
     font-size: 2.5vh;
-    background: #f9fbff;
+    background-color: #f9fbff;
     color: black;
     border-radius: 3.5vh;
     border: none;
     box-shadow: 5px 5px 10px #daecfd, -5px -5px 10px #ffffff, inset 0px 0px 0px #daecfd, inset 0px 0px 0px #ffffff;
-    transition: box-shadow 0.1s cubic-bezier(.22,.01,.2,1.01);
+    transition-property: box-shadow, color, background-color;
+    transition-duration: 0.1s; 
+    transition-timing-function: cubic-bezier(.22,.01,.2,1.01);
 }
 
 .button-wrap > button.selected {
-    background: #ca1617;
+    background-color: #ca1617;
     color: #f9fbff;
-    border-radius: 3.5vh;
-    border: 0.5vh solid #f9fbff;
 }
 
 .button-wrap > button.pressed1 {

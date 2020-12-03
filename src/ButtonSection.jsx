@@ -35,7 +35,8 @@ class ButtonSection extends React.Component {
         return (
         <div className="button-wrap">
         {this.state.buttons.map((x) => 
-            <Button key={x.id} className={x.id + (x.id==this.props.opSelected?" selected":"")} 
+            <Button key={x.id} className={x.id}
+                    isSelected={(x.id==this.props.opSelected)} 
                     value={x.symbol} isDisable={x.isDisable} 
                     onPress={() => this.props.onPress(x.id)}/>)}
         </div>
@@ -43,7 +44,7 @@ class ButtonSection extends React.Component {
     }
 }
 
-class Button extends React.Component {
+class Button extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -102,6 +103,12 @@ class Button extends React.Component {
                     {this.props.value}
                 </button>
                 );
+        } else if (this.props.isSelected) {
+            return (
+            <button key={this.props.className} className={this.props.className + " selected pressed1"}>
+                {this.props.value}
+            </button>
+            );
         } else {
             const pressClass = (this.state.pressLevel>0?" pressed"+this.state.pressLevel:"")
             return (

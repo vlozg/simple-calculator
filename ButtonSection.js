@@ -35,7 +35,8 @@ var ButtonSection = function (_React$Component) {
                 "div",
                 { className: "button-wrap" },
                 this.state.buttons.map(function (x) {
-                    return React.createElement(Button, { key: x.id, className: x.id + (x.id == _this2.props.opSelected ? " selected" : ""),
+                    return React.createElement(Button, { key: x.id, className: x.id,
+                        isSelected: x.id == _this2.props.opSelected,
                         value: x.symbol, isDisable: x.isDisable,
                         onPress: function onPress() {
                             return _this2.props.onPress(x.id);
@@ -48,8 +49,8 @@ var ButtonSection = function (_React$Component) {
     return ButtonSection;
 }(React.Component);
 
-var Button = function (_React$Component2) {
-    _inherits(Button, _React$Component2);
+var Button = function (_React$PureComponent) {
+    _inherits(Button, _React$PureComponent);
 
     function Button(props) {
         _classCallCheck(this, Button);
@@ -123,6 +124,12 @@ var Button = function (_React$Component2) {
                     { key: this.props.className, className: this.props.className + " disabled", value: this.props.value, disabled: true },
                     this.props.value
                 );
+            } else if (this.props.isSelected) {
+                return React.createElement(
+                    "button",
+                    { key: this.props.className, className: this.props.className + " selected pressed1" },
+                    this.props.value
+                );
             } else {
                 var pressClass = this.state.pressLevel > 0 ? " pressed" + this.state.pressLevel : "";
                 return React.createElement(
@@ -139,6 +146,6 @@ var Button = function (_React$Component2) {
     }]);
 
     return Button;
-}(React.Component);
+}(React.PureComponent);
 
 export { Button, ButtonSection };
