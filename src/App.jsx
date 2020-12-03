@@ -86,7 +86,7 @@ class App extends React.Component {
             case "times":
             case "divide":
                 let newState = {};
-                if (this.state.lastOp != "" || this.state.value != 0)
+                if (!(this.state.lastOp == "" && this.state.value == 0 && this.state.isEmptyInput))
                     newState.lastOp = instruct;
                 if (!this.state.isEmptyInput || this.state.value != 0){
                     newState.ans = {
