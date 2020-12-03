@@ -17,6 +17,9 @@ body {
     border-radius: 2vh;
     background: #f9fbff;
     padding: 30px 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .button-wrap {
