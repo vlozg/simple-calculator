@@ -29,10 +29,23 @@ var App = function (_React$Component) {
         _this.handleKeyPress = _this.handleKeyPress.bind(_this);
         _this.handleButton = _this.handleButton.bind(_this);
         _this.calculateCurrent = _this.calculateCurrent.bind(_this);
+        _this.numStrAppend = _this.numStrAppend.bind(_this);
+        _this.numStrPop = _this.numStrPop.bind(_this);
         return _this;
     }
 
     _createClass(App, [{
+        key: "numStrAppend",
+        value: function numStrAppend(char) {
+            return parseFloat(this.state.value.toString() + char);
+        }
+    }, {
+        key: "numStrPop",
+        value: function numStrPop() {
+            var numStr = this.state.value.toString();
+            if (numStr.length > 1) return parseFloat(numStr.substring(0, numStr.length - 1));else return 0;
+        }
+    }, {
         key: "calculateCurrent",
         value: function calculateCurrent() {
             switch (this.state.lastOp) {
@@ -59,6 +72,8 @@ var App = function (_React$Component) {
     }, {
         key: "handleButton",
         value: function handleButton(instruct) {
+            var _this2 = this;
+
             switch (instruct) {
                 case "reverse":
                     this.setState(function (state) {
@@ -67,52 +82,52 @@ var App = function (_React$Component) {
                     break;
                 case "num0":
                     this.setState(function (state) {
-                        return { value: state.value * 10, isEmptyInput: false };
+                        return { value: _this2.numStrAppend("0"), isEmptyInput: false };
                     });
                     break;
                 case "num1":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 1, isEmptyInput: false };
+                        return { value: _this2.numStrAppend("1"), isEmptyInput: false };
                     });
                     break;
                 case "num2":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 2, isEmptyInput: false };
+                        return { value: _this2.numStrAppend("2"), isEmptyInput: false };
                     });
                     break;
                 case "num3":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 3, isEmptyInput: false };
+                        return { value: _this2.numStrAppend("3"), isEmptyInput: false };
                     });
                     break;
                 case "num4":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 4, isEmptyInput: false };
+                        return { value: _this2.numStrAppend("4"), isEmptyInput: false };
                     });
                     break;
                 case "num5":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 5, isEmptyInput: false };
+                        return { value: _this2.numStrAppend("5"), isEmptyInput: false };
                     });
                     break;
                 case "num6":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 6, isEmptyInput: false };
+                        return { value: _this2.numStrAppend("6"), isEmptyInput: false };
                     });
                     break;
                 case "num7":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 7, isEmptyInput: false };
+                        return { value: _this2.numStrAppend("7"), isEmptyInput: false };
                     });
                     break;
                 case "num8":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 8, isEmptyInput: false };
+                        return { value: _this2.numStrAppend("8"), isEmptyInput: false };
                     });
                     break;
                 case "num9":
                     this.setState(function (state) {
-                        return { value: state.value * 10 + 9, isEmptyInput: false };
+                        return { value: _this2.numStrAppend("9"), isEmptyInput: false };
                     });
                     break;
                 case "plus":
@@ -144,7 +159,7 @@ var App = function (_React$Component) {
                     break;
                 case "del":
                     this.setState(function (state) {
-                        return { value: Math.floor(state.value / 10) };
+                        return { value: _this2.numStrPop() };
                     });
                     break;
                 case "clear":
