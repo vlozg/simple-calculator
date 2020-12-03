@@ -34,7 +34,10 @@ class ButtonSection extends React.Component {
     render() {
         return (
         <div className="button-wrap">
-        {this.state.buttons.map((x) => <Button key={x.id} className={x.id} value={x.symbol} isDisable={x.isDisable} onPress={() => this.props.onPress(x.id)}/>)}
+        {this.state.buttons.map((x) => 
+            <Button key={x.id} className={x.id + (x.id==this.props.opSelected?" selected":"")} 
+                    value={x.symbol} isDisable={x.isDisable} 
+                    onPress={() => this.props.onPress(x.id)}/>)}
         </div>
         );
     }

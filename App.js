@@ -180,8 +180,8 @@ var App = function (_React$Component) {
             return React.createElement(
                 React.Fragment,
                 null,
-                React.createElement(DisplaySection, { value: this.state.value, lastOp: this.state.lastOp, ans: this.state.ans, onInputChange: this.handleInput }),
-                React.createElement(ButtonSection, { onPress: this.handleButton })
+                React.createElement(DisplaySection, { value: this.state.value, ans: this.state.ans, onInputChange: this.handleInput }),
+                React.createElement(ButtonSection, { onPress: this.handleButton, opSelected: this.state.lastOp })
             );
         }
     }]);

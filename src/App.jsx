@@ -141,8 +141,8 @@ class App extends React.Component {
     render() {
         return (
         <React.Fragment>
-            <DisplaySection value={this.state.value} lastOp={this.state.lastOp} ans={this.state.ans} onInputChange={this.handleInput}/>
-            <ButtonSection onPress={this.handleButton}/>
+            <DisplaySection value={this.state.value} ans={this.state.ans} onInputChange={this.handleInput}/>
+            <ButtonSection onPress={this.handleButton} opSelected={this.state.lastOp}/>
         </React.Fragment>
         );
     }

@@ -35,7 +35,9 @@ var ButtonSection = function (_React$Component) {
                 "div",
                 { className: "button-wrap" },
                 this.state.buttons.map(function (x) {
-                    return React.createElement(Button, { key: x.id, className: x.id, value: x.symbol, isDisable: x.isDisable, onPress: function onPress() {
+                    return React.createElement(Button, { key: x.id, className: x.id + (x.id == _this2.props.opSelected ? " selected" : ""),
+                        value: x.symbol, isDisable: x.isDisable,
+                        onPress: function onPress() {
                             return _this2.props.onPress(x.id);
                         } });
                 })
